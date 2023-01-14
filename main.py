@@ -116,7 +116,7 @@ session.add_all([s1, s2, s3, s4, s5, s6])
 session.commit()
 
 acction = input()
-q = session.query(Book.title, Publisher.name, Sale).join(Publisher, Book.id_publisher==Publisher.id).join(Stock, Stock.id_book==Book.id).join(Sale, Sale.id_stock==Stock.id).filter(sq.or_(Book.title==acction, Publisher.name==acction))
+q = session.query(Book.title, Shop.name, Sale).join(Publisher, Book.id_publisher==Publisher.id).join(Stock, Stock.id_book==Book.id).join(Sale, Sale.id_stock==Stock.id).join(Shop, Stock.id_shop==Shop.id).filter(sq.or_(Book.title==acction, Publisher.name==acction))
 for title, name, sale in q.all():
     print(f'{title} | {name} | {sale.price} | {sale.date_sale}')
 
